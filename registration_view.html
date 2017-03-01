@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <title>CSUFMail Registration</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#loginpanel").hide();
+            $(".btn-slide").click(function () {
+                $("#loginpanel").slideToggle("slow");
+            });
+
+        })
+    </script>
+</head>
+<body>
+
+<div style="border: 1px grey;">
+    <h1>Register for CSUFMail!</h1>
+    <form action="register.php" method="post">
+        Your name: <br>
+        <input type="text" name="name" placeholder="Full name" maxlength="25"> <br>
+        User name:<br>
+        <input type="text" name="username" placeholder="Desired username" maxlength="15"><br>
+        Password:<br>
+        <input type="password" name="password" placeholder="Choose a password" maxlength="15"><br>
+        <input type="submit" value="Submit" >
+    </form>
+</div>
+
+<p class="slide"><a href="#" class="btn-slide"><h2>Already Registered?</h2></a> </p>
+<div id="loginpanel">
+    <form action="login.php" method="post">
+        User name: <br>
+        <input type="text" name="username" placeholder="Your username" maxlength="15"> <br>
+        Password: <br>
+        <input type="password" name="password" placeholder="Your password" maxlength="15"> <br>
+        <input type="submit" name="submit">
+    </form>
+</div>
+</body>

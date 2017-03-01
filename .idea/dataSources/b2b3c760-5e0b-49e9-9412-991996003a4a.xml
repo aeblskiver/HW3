@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Project3@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="Project3">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="practice"/>
+    <schema id="7" parent="1" name="Project"/>
+    <schema id="8" parent="1" name="sys"/>
+    <table id="9" parent="2" name="mailbox"/>
+    <table id="10" parent="2" name="users"/>
+    <column id="11" parent="9" name="messageID">
+      <Position>1</Position>
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="12" parent="9" name="subject">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="13" parent="9" name="msgtime">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="9" name="msgtext">
+      <Position>4</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="9" name="sender">
+      <Position>5</Position>
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="9" name="receiver">
+      <Position>6</Position>
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="9" name="status">
+      <Position>7</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="18" parent="9" name="receiver">
+      <ColNames>receiver</ColNames>
+    </index>
+    <index id="19" parent="9" name="sender">
+      <ColNames>sender</ColNames>
+    </index>
+    <key id="20" parent="9" name="PRIMARY">
+      <ColNames>messageID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="21" parent="9" name="mailbox_ibfk_1">
+      <ColNames>sender</ColNames>
+      <RefSchemaName>Project3</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>username</RefColNames>
+    </foreign-key>
+    <foreign-key id="22" parent="9" name="mailbox_ibfk_2">
+      <ColNames>receiver</ColNames>
+      <RefSchemaName>Project3</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>username</RefColNames>
+    </foreign-key>
+    <column id="23" parent="10" name="name">
+      <Position>1</Position>
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="10" name="username">
+      <Position>2</Position>
+      <DataType>varchar(15)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="10" name="password">
+      <Position>3</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="26" parent="10" name="PRIMARY">
+      <ColNames>username</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
