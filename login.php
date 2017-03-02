@@ -49,9 +49,13 @@ else {
             $db->close();
         }
 
+
+
     }
     echo "Welcome " . $_SESSION['username'];
-
+    echo <<<link
+<a href="compose.php">Send a message!</a>
+link;
 
 
 }

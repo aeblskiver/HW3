@@ -2,8 +2,61 @@
 <head>
     <title>Send a message</title>
 </head>
+
+<?php
+/**
+ * Created by PhpStorm.
+ * User: justin
+ * Date: 2/27/17
+ * Time: 6:00 PM
+ */
+if (!isset($_POST['submit'])) {
+    generateForm();
+}
+
+//else (isset($_POST['submit'])  && (!empty($_POST['receiver']) || !empty($_POST['subject']) || !empty($_POST['msgtext']))) {
+else {
+    session_start();
+    require "mysql.connection.php";
+    $subject = $_POST['subject'];
+    $msgtext = $_POST['msgtext'];
+    $sender = $_SESSION['username'];
+    $receiver = $_POST['receiver'];
+    $status = 0; // 0 = new message
+
+    echo $subject . " " . $msgtext . " " . $sender . " " . $receiver;
+
+
+    $query = "INSERT INTO `mailbox` (subject,msgtext,sender,receiver,status)  VALUES (?,?,?,?,?)";
+    $stmt = $db->init();
+    $stmt = $db->prepare($query);
+    $diduwork = $stmt->bind_param('ssssi',$subject,$msgtext,$sender,$receiver,$status);
+    $stmt->execute();
+//    $stmt->bind_result($result);
+//    mysqli_next_result($db);
+
+    echo $diduwork;
+    if (!$diduwork) {
+        echo "Error sending mail";
+        echo $stmt->error;
+    }
+    else {
+        echo "Mail sent";
+    }
+
+}
+
+function generateForm() {
+    echo <<<form
 <h1>Create a new message</h1>
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>">
+
+<form action='
+form;
+
+echo $_SERVER['PHP_SELF'] . "' method='post'>";
+
+echo <<<form
+
 <h3>Send to:</h3>
 <input type="text" name="receiver" maxlength="25" placeholder="Recipient"><br>
 <h3>Subject:</h3>
@@ -13,24 +66,6 @@
 
 <input type="submit" name="submit">
 </form>
-<?php
-/**
- * Created by PhpStorm.
- * User: justin
- * Date: 2/27/17
- * Time: 6:00 PM
- */
-if (!empty($_POST['receiver']) || !empty($_POST['subject']) || !empty($_POST['msgtext'])) {
-    require "mysql.connection.php";
-
-    $subject = $_POST['subject'];
-    $msgtime = date();
-    echo $msgtime;
-
-    $query = "INSERT INTO `mailbox` SET subject=?, msgtime=?, msgtext=?, sender=?, 
-      receiver=?, status=?";
-    $stmt = $db->init();
-    $stmt = $db->prepare($query);
-    //$stmt->bind_param('sisssi',)
+form;
 
 }

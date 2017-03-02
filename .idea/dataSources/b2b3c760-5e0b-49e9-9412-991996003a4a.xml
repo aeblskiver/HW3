@@ -29,6 +29,7 @@
       <Position>3</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="14" parent="9" name="msgtext">
       <Position>4</Position>
