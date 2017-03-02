@@ -30,18 +30,20 @@ else {
     $query = "INSERT INTO `mailbox` (subject,msgtext,sender,receiver,status)  VALUES (?,?,?,?,?)";
     $stmt = $db->init();
     $stmt = $db->prepare($query);
-    $diduwork = $stmt->bind_param('ssssi',$subject,$msgtext,$sender,$receiver,$status);
+    $inserted = $stmt->bind_param('ssssi',$subject,$msgtext,$sender,$receiver,$status);
     $stmt->execute();
+    //The following code wasn't needed because it didn't do anything
+    //There were no results to bind to, dummy
 //    $stmt->bind_result($result);
 //    mysqli_next_result($db);
 
-    echo $diduwork;
-    if (!$diduwork) {
+    if (!$inserted) {
         echo "Error sending mail";
         echo $stmt->error;
     }
     else {
-        echo "Mail sent";
+        echo "Mail sent<br>";
+        echo "<a href='mailbox.php'>My mailbox</a>";
     }
 
 }

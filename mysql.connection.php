@@ -11,4 +11,3 @@ if (mysqli_connect_errno()) {
     echo '<p>Error: Could not connect to database</p>';
     exit;
 }
-

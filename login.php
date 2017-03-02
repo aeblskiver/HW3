@@ -20,15 +20,12 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
 }
 else {
     session_start();
-    if (!isset($_SESSION) || empty($_SESSION)) {
         if (isset($_POST['username'])) {
             $username = $_POST['username'];
             $pwd = $_POST['password'];
             $pwd = md5("justinrules".$pwd);
 
             require "mysql.connection.php";
-
-            echo "Password: " . $pwd;
 
             $query = "SELECT username FROM `users` WHERE username=? && password=?";
             $stmt = $db->init();
@@ -48,13 +45,10 @@ else {
             $stmt->close();
             $db->close();
         }
-
-
-
-    }
-    echo "Welcome " . $_SESSION['username'];
+    echo "Welcome " . $_SESSION['username'] . "<br>";
     echo <<<link
-<a href="compose.php">Send a message!</a>
+<a href="compose.php">Send a message!</a><br>
+<a href="mailbox.php">Go to mailbox!</a><br>
 link;
 
 
