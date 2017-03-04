@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <head>
     <title>My mailbox</title>
@@ -5,7 +9,6 @@
 <html>
 <h1>Welcome to your mailbox!!!</h1>
 <body>
-</form>
 
 <?php
 /**
@@ -16,7 +19,6 @@
  */
 require "mysql.connection.php";
 
-session_start();
 $user = $_SESSION['username'];
 
 $query = "SELECT subject,msgtime,sender FROM mailbox WHERE receiver='$user' ORDER BY msgtime DESC";

@@ -1,4 +1,8 @@
 <?php
+session_start();
+?>
+
+<?php
 /**
  * Created by PhpStorm.
  * User: justin
@@ -19,7 +23,6 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
 <?php
 }
 else {
-    session_start();
         if (isset($_POST['username'])) {
             $username = $_POST['username'];
             $pwd = $_POST['password'];

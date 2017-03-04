@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <head>
     <title>Send a message</title>
@@ -16,7 +20,6 @@ if (!isset($_POST['submit'])) {
 
 //else (isset($_POST['submit'])  && (!empty($_POST['receiver']) || !empty($_POST['subject']) || !empty($_POST['msgtext']))) {
 else {
-    session_start();
     require "mysql.connection.php";
     $subject = $_POST['subject'];
     $msgtext = $_POST['msgtext'];
