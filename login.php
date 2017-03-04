@@ -12,13 +12,13 @@ session_start();
 if (empty($_POST['username']) || empty($_POST['password'])) {
     echo "<p>Username and password required</p>";
     ?>
-    <form action="<? echo $_SERVER['PHP_SELF'] ?>" method="post"></form>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     User name: <br>
     <input type="text" name="username" placeholder="Your username" maxlength="15"> <br>
     Password: <br>
     <input type="password" name="password" placeholder="Your password" maxlength="15"> <br>
     <input type="submit" name="submit">
-
+    </form>
 
 <?php
 }
