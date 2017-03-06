@@ -18,7 +18,6 @@ if (!isset($_POST['submit'])) {
     generateForm();
 }
 
-//else (isset($_POST['submit'])  && (!empty($_POST['receiver']) || !empty($_POST['subject']) || !empty($_POST['msgtext']))) {
 else {
     require "mysql.connection.php";
     $subject = $_POST['subject'];
@@ -27,18 +26,11 @@ else {
     $receiver = $_POST['receiver'];
     $status = 0; // 0 = new message
 
-    echo $subject . " " . $msgtext . " " . $sender . " " . $receiver;
-
-
     $query = "INSERT INTO `mailbox` (subject,msgtext,sender,receiver,status)  VALUES (?,?,?,?,?)";
-    $stmt = $db->init();
+    //$stmt = $db->init();
     $stmt = $db->prepare($query);
     $inserted = $stmt->bind_param('ssssi',$subject,$msgtext,$sender,$receiver,$status);
     $stmt->execute();
-    //The following code wasn't needed because it didn't do anything
-    //There were no results to bind to, dummy
-//    $stmt->bind_result($result);
-//    mysqli_next_result($db);
 
     if (!$inserted) {
         echo "Error sending mail";

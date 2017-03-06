@@ -5,11 +5,20 @@ session_start();
 <!DOCTYPE html>
 <head>
     <title>My mailbox</title>
+    <style type="text/css">
+        .unread {
+            font-weight:bold;
+        }
+    </style>
 </head>
 <html>
 <h1>Welcome to your mailbox!!!</h1>
 <body>
 
+
+<!-- **** Table Start **** -->
+<table>
+    <th>Time</th><th>Subject</th><th>Sent by</th>
 <?php
 /**
  * Created by PhpStorm.
@@ -21,22 +30,26 @@ require "mysql.connection.php";
 
 $user = $_SESSION['username'];
 
-$query = "SELECT subject,msgtime,sender FROM mailbox WHERE receiver='$user' ORDER BY msgtime DESC";
-echo "hello " . $user;
+$query = "SELECT subject,msgtime,sender,status,messageID FROM mailbox WHERE receiver='$user' ORDER BY msgtime DESC";
+echo "Hello " . $_SESSION['username'] . "!";
+echo "<a href='logout.php'>Sign out?</a>";
 if ($result = $db->query($query)) {
-    echo "<table>";
-    echo "<th>Time</th><th>Subject</th><th>Sent by</th>";
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row['msgtime'] . "</td>";
-        echo "<td>" . $row['subject'] . "</td>";
-        echo "<td>" . $row['sender'] . "</td>";
+        if ($row['status'] != 2) {
+            echo "<tr><td>";
+            echo $row['msgtime'] . "</td>";
+            echo "<td ";
+            if ($row['status'] == 0) echo "class='unread'";
+            echo ">" . "<a href=message.php?messageID=" . $row['messageID'] . ">" . $row['subject'] . "</a></td>";
+            echo "<td>" . $row['sender'] . "</td>";
+        }
     }
-    echo "</table>";
-    }
+}
 
+$db->close();
 ?>
-
+</table>
+<!-- **** Table End **** -->
 </body>
 </html>
 

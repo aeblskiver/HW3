@@ -8,6 +8,5 @@
 
 @$db = new mysqli('localhost','justin','shIbby23','Project3');
 if (mysqli_connect_errno()) {
-    echo '<p>Error: Could not connect to database</p>';
-    exit;
+  die('Connect error: ' . $db->connect_errno);
 }

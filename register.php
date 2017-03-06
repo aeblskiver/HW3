@@ -21,6 +21,10 @@ if (empty($_POST["name"]) || empty($_POST["username"]) || empty($_POST["password
 //Handle registration
 else {
     require "mysql.connection.php";
+//    $db = @new mysqli('ecsmysql','cs431s34','uohoruek','cs431s34');
+//    if ($db->connect_errno) {
+//        die('Connect error: ' . $db->connect_errno);
+//    }
 
     $salt = "justinrules";
     $name = $_POST['name'];
@@ -28,7 +32,6 @@ else {
     $pword = $salt . $_POST['password'];
 
     $query = "INSERT INTO `users` SET name=?, username=?, password=md5(?)";
-    $stmt = $db->init();
     $stmt = $db->prepare($query);
     $stmt->bind_param('sss',$name,$username,$pword);
     $stmt->execute();
